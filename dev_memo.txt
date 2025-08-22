@@ -1,0 +1,40 @@
+hmacfs/
+├── include/
+│   ├── fs_operations.h        # FUSE 파일 연산 관련
+│   ├── common.h               # 공통 매크로, 에러 처리 등
+│   ├── hmacfs.h               # 공통 정의
+│   ├── fs_ops.h               # FUSE 연산 정의
+│   ├── hmac.h                 # HMAC 관련
+│   ├── metadata.h             # 병렬 메타트리 관리
+│   ├── logger.h               # 로깅
+│   └── config.h               # 설정값(전역 상수, 설정값 정의(HMAC 키 파일 경로, 로그 경로 등))
+│
+├── src/
+│   ├── main.c                 # FUSE 초기화/실행(main, FUSE ops 등록)
+│   ├── fs_operations.c               # FUSE 파일 연산 (read, write 등)
+│   ├── hmac.c                 # HMAC 계산/검증
+│   ├── metadata.c             # meta 디렉토리 관리
+│   ├── logger.c               # 로그 관리
+│   └── config.c               # 설정 관리
+│
+├── data/                      # 실제 파일 저장 디렉토리
+│   └── hello.txt
+│
+├── meta/                      # 병렬 HMAC 저장 디렉토리
+│   └── hello.txt.hmac
+│
+├── logs/
+│   └── integrity.log          # 변조 탐지 로그
+│
+├── scripts/
+│   ├── mount.sh               # 마운트
+│   ├── umount.sh              # 언마운트
+│   └── gen_key.sh             # HMAC 키 생성
+│
+├── tests/                     # 단위 테스트
+│   ├── test_hmac.c
+│   ├── test_metadata.c
+│   └── test_fs.c
+│
+├── Makefile
+└── README.md
