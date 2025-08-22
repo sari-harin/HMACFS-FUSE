@@ -1,0 +1,22 @@
+sudo apt update
+sudo apt install -y build-essential fuse3 libfuse3-dev
+
+sudo apt install pkg-config
+
+hmacfs/에서 make 실행(프로젝트 루트)
+
+실행 예시
+    mkdir -p backend mnt
+
+    # backend 디렉토리를 실제 데이터 저장소로 사용
+    ./hmacfs mnt -f -d -o root=$(pwd)/backend
+
+다른 터미널에서 테스트
+    echo "hello fuse" > mnt/a.txt
+    cat mnt/a.txt
+    ls -l mnt
+    mv mnt/a.txt mnt/b.txt
+    truncate -s 0 mnt/b.txt
+    rm mnt/b.txt
+
+fusermount3 -u mnt
